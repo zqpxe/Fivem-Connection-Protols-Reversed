@@ -1,0 +1,37 @@
+"""
+This script is made to fill up a server in fivem. It utilizes its connecting protocol, which I've reversed. I have not made it past this stage, as it requires some weird tokens, but here you go.
+"""
+
+import requests
+
+serverAdress = "45.84.198.36"
+serverPort = "30120"
+
+url = f"http://{serverAdress}:{serverPort}/client"
+
+headers = {
+    "Host": f"{serverAdress}:{serverPort}",
+    "User-Agent": "CitizenFX/1",
+    "Accept": "*/*",
+    "Content-Type": "application/x-www-form-urlencoded",
+}
+
+data = {
+    "method": "initConnect", 
+    "gameBuild": "",
+    "gameName": "",
+    "guid": "",
+    "name": "",
+    "protocol": "12",
+    "cfxTicket2": "",
+    "cfxTicket": ""
+}
+# If you manage to get several tokens with not already used stuff, you can fill servers up with fake players.
+# Note you'll have to get the right data arguments too for your account
+
+response = requests.post(url, headers=headers, data=data)
+
+print(f"Status Code: {response.status_code}")
+print(f"Response Body: {response.text}")
+
+# If you manage somehow automatic getting the arguments without manually filling them, hit me up asap!
