@@ -1,37 +1,44 @@
 """
-This script is made to fill up a server in fivem. It utilizes its connecting protocol, which I've reversed. I have not made it past this stage, as it requires some weird tokens, but here you go.
+This script shows the attempt when your fivem client connects to a server
+It misses some arguments, which I cannot possibly generate alone. 
+
+Special tokens and additional data that are not included or explained here.
+Note: Misuse of ths script may actually cause you more harm than good.
 """
 
 import requests
 
-serverAdress = "45.84.198.36"
-serverPort = "30120"
+server_address = ""  # Put the server IP
+server_port = ""     # Put the server Port (eg. 30120)
 
-url = f"http://{serverAdress}:{serverPort}/client"
+# The URL the client creates under the process of joining
+url = f"http://{server_address}:{server_port}/client"
 
+# Headers for the request (From the client too)
 headers = {
-    "Host": f"{serverAdress}:{serverPort}",
+    "Host": f"{server_address}:{server_port}",
     "User-Agent": "CitizenFX/1",
     "Accept": "*/*",
     "Content-Type": "application/x-www-form-urlencoded",
 }
 
+# Data payload for the request (Also from the client, who all are needed)
 data = {
     "method": "initConnect", 
-    "gameBuild": "",
-    "gameName": "",
-    "guid": "",
-    "name": "",
-    "protocol": "12",
-    "cfxTicket2": "",
-    "cfxTicket": ""
+    "gameBuild": "",       # Replace with the game build number
+    "gameName": "gta5",        # Just the type of game 
+    "guid": "",            # Replace with the GUID
+    "name": "",            # Replace with the desired player name
+    "protocol": "12",      # Protocol version
+    "cfxTicket2": "",      # Replace with a valid token
+    "cfxTicket": ""        # Replace with a valid token
 }
-# If you manage to get several tokens with not already used stuff, you can fill servers up with fake players.
-# Note you'll have to get the right data arguments too for your account
 
-response = requests.post(url, headers=headers, data=data)
+try:
+    response = requests.post(url, headers=headers, data=data)
+    print(f"Status Code: {response.status_code}")
+except requests.RequestException as e:
+    print(f"An error occurred: {e}")
 
-print(f"Status Code: {response.status_code}")
-print(f"Response Body: {response.text}")
-
-# If you manage somehow automatic getting the arguments without manually filling them, hit me up asap!
+# Note: Automating token generation or retrieving the rest of the right arguments is not here. 
+# If you figure out a method to do so, let me know asap!
