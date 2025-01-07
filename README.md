@@ -18,3 +18,6 @@ pip install requests
 ## Disclaimer:
 This script is for **educational purposes only**.  
 I take no responsibility for any issues that may arise by using it.
+
+## Extra
+More will come with time as I release further in my research. Things like being able to download resources from a server may arrive in the future :)
